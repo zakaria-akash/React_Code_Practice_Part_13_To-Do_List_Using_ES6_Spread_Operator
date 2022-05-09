@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import $ from "jquery";
 
 function App() {
+  let [inputItem, setInputItem] = useState("");
   let [listArr, setListArr] = useState([]);
-  let inputItem;
 
   function takeInput(e) {
-    inputItem = e.target.value;
+    const newValue = e.target.value;
+    setInputItem(newValue);
   }
 
   function gotClicked() {
-    setListArr((oldList) => [...oldList, inputItem]);
-    $("#listID").append("<li>" + inputItem + "</li>");
+    setListArr((oldList) => {
+      return [...oldList, inputItem];
+    });
+    setInputItem("");
   }
 
   return (
@@ -23,17 +25,20 @@ function App() {
         <input
           type="text"
           name="inputItem"
-          placeholder="add an item"
+          placeholder="add your work plan"
           required="required"
           onChange={takeInput}
+          value={inputItem}
         />
         <button onClick={gotClicked}>
           <span>Add</span>
         </button>
       </div>
       <div>
-        <ul id="listID">
-          <li>A Item</li>
+        <ul>
+          {listArr.map((item) => (
+            <li>{item}</li>
+          ))}
         </ul>
       </div>
     </div>
