@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 
 function ToDoItem(props) {
-  const [clickStatus, setClickStatus] = useState(false);
-  function makeLineThrough() {
-    setClickStatus((oldStatus) => !oldStatus);
-  }
   return (
     <li
-      style={{ textDecoration: clickStatus ? "line-through" : "none" }}
-      onClick={makeLineThrough}
+      onClick={() => {
+        props.onChecked(props.id);
+      }}
     >
       {props.text}
     </li>
