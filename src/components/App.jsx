@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ToDoItem from "./ToDoItem";
+import InputField from "./InputField";
+import AddButton from "./AddButton";
 
 function App() {
   let [inputItem, setInputItem] = useState("");
@@ -15,6 +17,7 @@ function App() {
       return [...oldList, inputItem];
     });
     setInputItem("");
+    console.log(listArr[listArr.length - 1]);
   }
   function deleteItem(id) {
     setListArr((oldItems) => {
@@ -27,17 +30,15 @@ function App() {
         <h1>To-Do List</h1>
       </div>
       <div className="form">
-        <input
-          type="text"
-          name="inputItem"
-          placeholder="add your work plan"
-          required="required"
-          onChange={takeInput}
+        <InputField
+          type={"text"}
+          name={"inputItem"}
+          placeholder={"add your work plan"}
+          required={"required"}
+          inputChanged={takeInput}
           value={inputItem}
         />
-        <button onClick={gotClicked}>
-          <span>Add</span>
-        </button>
+        <AddButton addClick={gotClicked} />
       </div>
       <div>
         <ul>
